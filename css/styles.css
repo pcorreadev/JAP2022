@@ -188,3 +188,22 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+.validation-form p {
+	color: #e74c3c;
+	visibility: hidden;
+    margin-top: 2%;
+}
+
+.list {
+  list-style-type: none;
+  padding: 4%;
+  width: 60%;
+  margin: auto;
+}
+
+.form-label {
+  font-size: 1.3vw;
+  font-weight: bold;
+  padding: 1%;
+}

@@ -9,21 +9,46 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
     body {
       background-color: rgb(248, 249, 250);
     }
   </style>
 </head>
-
 <body>
-  <main class="mt-5">
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+  <main>
+    <section class="text-center border border-light p-5">
+      <div>
+        <img src="img/login.png" alt="ecommerce-logo" width="30%">
       </div>
-    </div>
-  </main>
+      <h1>Iniciar sesión</h1>
+          <form class="form-group" id="form">
+              <ul class="list">
+                  <li class= "validation-form">
+                      <label class="form-label" for="username">Usuario:</label>
+                      <input class="form-control" type="text" name="username" id="username" placeholder="Escribe tu nombre de usuario">
+                      <p id="username-error">error</p>
+                  </li>
+                  <div class= "validation-form">
+                      <label class="form-label" for="password">Contraseña:</label>
+                      <input type="password" class="form-control" name="password" id="password" placeholder="Escribe tu contraseña">
+                      <p id="password-error">error</p>
+                  </div>
+                  <li>
+                      <div>
+                              <input type="checkbox" checked>
+                              <label>Recordarme</label>
+                      </div>
+                  </li>
+              </ul>
+          </form>
+      </div>
+      <div>
+          <a><button type="button" id="buttonlogin" class="btn btn-primary btn-block confirm-button">Iniciar sesión</button></a>
+      </div>
+    </section>
+</main>
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
