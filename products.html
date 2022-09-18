@@ -46,13 +46,18 @@
               <h1 class="display-4">Productos</h1>
               <p id="categoria">Veras aqui todos los productos de la categoria </p>
           </div>
-          <button id="filtrar">filtrar</button>
-          <button id="sortAsc">Ordenar de menor a mayor Precio</button>
-          <button id="sortDesc">Ordenar de mayor a menor Precio</button>
-          <button id="sortRelev">Ordenar de mayor a menor relevancia</button>
-          <button id="reset">Borrar filtros</button>
-          <input type="number" class="form-control" name="min" id="min" placeholder="Indique menor precio">
-          <input type="number" class="form-control" name="min" id="max" placeholder="Indique mayor precio">
+          <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
+            <input type="radio" class="btn-check" name="options" id="sortAsc">
+            <label class="btn btn-light" for="sortAsc">-- a ++</label>
+            <input type="radio" class="btn-check" name="options" id="sortDesc">
+            <label class="btn btn-light" for="sortDesc">++ a --</label>
+            <input type="radio" class="btn-check" name="options" id="sortRelev" checked>
+            <label class="btn btn-light" for="sortRelev"><i class="fas fa-sort-amount-down mr-1"></i></label>
+            <button id="reset">Borrar filtros</button>
+            <input type="number" class="form-control" name="min" id="min" placeholder="Indique menor precio">
+            <input type="number" class="form-control" name="max" id="max" placeholder="Indique mayor precio">
+            <button id="filtrar">filtrar</button>
+          </div>
       <div class="row">
           <div class="col-lg-8 mx-auto">
               <ul id="product list" class="list-group shadow">

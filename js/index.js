@@ -8,8 +8,7 @@ document.addEventListener("DOMContentLoaded", function(){
     }; 
 
     document.getElementById("autos").addEventListener("click", function() {
-        let category = localStorage.getItem('id')
-        localStorage.setItem("catID", category)
+        localStorage.setItem("catID", 101);
         window.location = "products.html"
     });
 

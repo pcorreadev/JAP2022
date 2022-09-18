@@ -1,17 +1,22 @@
-let minCount = undefined;
-let maxCount = undefined;
+const ORDER_ASC_BY_PRICE = "--- a +++";
+const ORDER_DESC_BY_PRICE = "+++ a ---";
+const ORDER_BY_PROD_COUNT = "count";
+let productID = PRODUCTS_URL + localStorage.getItem("catID") + EXT_TYPE;
+let initialArray = []
 let currentArray = []
+let criteria = undefined;
+let maxCount = undefined;
+let minCount = undefined;
 
 const getProducts = () => {
         let product="";
-
-        currentArray.products.map((item)=>{
+        initialArray.products.map((item)=>{
                 if (((minCount == undefined) || (minCount != undefined && item.cost >= minCount)) &&
                 ((maxCount == undefined) || (maxCount != undefined && item.cost <= maxCount))) {
                 product +=`
-                <li class="list-group-item">
+                <li class="list-group-item" id=${item.id}>
                 <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                    <div>
+                    <div class = "product">
                         <h3 class="mt-0 font-weight-bold mb-2">${item.name}</h3>
                         <p class="font-italic text-muted mb-0 small">${item.description}</p>
                         <div class="d-flex align-items-center justify-content-between mt-1">
@@ -22,48 +27,116 @@ const getProducts = () => {
                 </div>
                 <div>
                     <img src="${item.image}" alt="item image" width="200" class media align-items-lg-left>
-                </div>`
+                </div>
+                </li>`
                }
             })
-            document.getElementById('product list').innerHTML= product    
+            document.getElementById('product list').innerHTML= product
+            const productList = document.querySelectorAll("li")
+                 for (const product of productList) {
+                    product.addEventListener('click', function(e) {
+                    let productId = product.id
+                    console.log(productId)     
+                    localStorage.setItem("prodID", productId);
+                    window.location = "product-info.html"
+                })   
+            } 
         }
 
 document.getElementById("filtrar").addEventListener("click", function(){
     minCount = document.getElementById("min").value;
     maxCount = document.getElementById("max").value;
-    console.log(maxCount)
     getProducts();
 });
-      
+
+// var products = document.getElementById("product list");
+
+// var theElements = hostDiv.getElementsByClassName("theClassDivName");
+
+// theElements[0].style.display = "none";
+
+
+
+// document.getElementsByClassName("list-group-item").getElementById("product list")addEventListener("click", function(){
+//     const setProdId = () => {
+//         localStorage.setItem("prodId", id);
+//         window.location = "products.html"
+//     }
+//     setProdId();
+// })
+
+// function setProdID(id) {
+//     localStorage.setItem("prodID", id);
+//     window.location = "product-info.html"
+// }
+
 document.getElementById("reset").addEventListener("click", function(){
-    getJSONData('https://japceibal.github.io/emercado-api/cats_products/101.json').then(function(resultObj){
-        currentArray = resultObj.data 
-        minCount = document.getElementById("min").value = '';
-        maxCount = document.getElementById("max").value = '';
-        getProducts();
+    minCount = undefined
+    maxCount = undefined
+    currentArray = initialArray;
+    initialArray.products.sort(function (a, b) {
+        return a.id - b.id
+    })
+    getProducts(initialArray);
+});
+
+function sortProducts(){
+    if (criteria === ORDER_BY_PROD_COUNT){
+    initialArray.products.sort(function (a, b) {
+        return b.soldCount - a.soldCount   
     });
-})
-
-document.getElementById("sortRelev").addEventListener("click", function () {
-    currentArray.products.sort(function (a, b) {
-        return b.soldCount - a.soldCount 
-    })
-    getProducts()
-});
-
-document.getElementById("sortAsc").addEventListener("click", function () {
-    currentArray.products.sort(function (a, b) {
-        return a.cost - b.cost
-    })
-    getProducts()
-});
-
-document.getElementById("sortDesc").addEventListener("click", function () {
-    currentArray.products.sort(function (a, b) {
+    }else if (criteria === ORDER_DESC_BY_PRICE){
+    initialArray.products.sort(function (a, b) {
        return b.cost - a.cost
      })
-    getProducts()
- });
+
+    }else if (criteria === ORDER_ASC_BY_PRICE){
+    initialArray.products.sort(function (a, b) {
+    return a.cost - b.cost 
+    })  
+}
+getProducts()
+}
+
+// const openProduct = () => {
+// let list = document.querySelectorAll("img");
+//     for (let item of list) {
+//     item.addEventListener('click', function() {
+//         const setProdId = () => {
+//             localStorage.setItem("prodId", id);
+//             window.location = "products.html"
+//         }
+//         setProdId(id);
+//     })
+//     }
+// }
+
+// const openProduct = () => {
+// const elements = document.querySelectorAll(".product")
+//     for (let item of elements) {
+//         item.addEventListener('click', function() {
+//         window.location = "products.html"
+//     }
+//     )}
+// }
+
+// const openProduct = () => {
+// let arrayElements = document.querySelectorAll('img');
+// for (let element of arrayElements) {
+//     element.addEventListener("click", function() {
+//         console.log('Whoa! You clicked me')
+//     });
+// }
+// }
+
+
+// }
+
+// const fakeImages = document.querySelectorAll("img")
+// 	for (const fakeImage of fakeImages) {
+// 	    fakeimage.addEventListener('click', function(event) {
+   
+// 	}
 
 document.addEventListener("DOMContentLoaded", function(e){
     let usuario = localStorage.getItem('user');
@@ -71,11 +144,44 @@ document.addEventListener("DOMContentLoaded", function(e){
         window.location = "login.html"
     } else {
     document.getElementById('user').innerHTML = usuario ;
-    }
-    getJSONData('https://japceibal.github.io/emercado-api/cats_products/101.json').then(function(resultObj){
-            currentArray = resultObj.data
-            document.getElementById('categoria').innerHTML += currentArray.catName;  
-            getProducts();
+    getJSONData(productID).then(function(resultObj){
+    if (resultObj.status === "ok"){
+        initialArray = resultObj.data
+        currentArray = JSON.parse(JSON.stringify(initialArray));
+        document.getElementById('categoria').innerHTML += initialArray.catName;  
+        getProducts();
+        }
+    })
+
+    document.getElementById("sortRelev").addEventListener("click", function(){
+        criteria = ORDER_BY_PROD_COUNT; 
+        sortProducts();
     });
-});
- 
+
+    document.getElementById("sortDesc").addEventListener("click", function(){
+        criteria =(ORDER_DESC_BY_PRICE);
+        sortProducts();
+    });
+
+    document.getElementById("sortAsc").addEventListener("click", function(){
+        criteria =(ORDER_ASC_BY_PRICE);
+        sortProducts();
+    });
+
+    
+    document.getElementById("sortAsc").addEventListener("click", function(){
+        criteria =(ORDER_ASC_BY_PRICE);
+        sortProducts();
+    });
+
+    // const buttons = document.querySelectorAll("div")
+    // for (const button of buttons) {
+    // button.addEventListener('click', function(event) {
+    // console.log('talo')
+    // })
+    // }
+
+    // openProduct();
+
+};
+})

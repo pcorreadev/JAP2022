@@ -175,16 +175,6 @@ footer p {
   display: none;
 }
 
-main {
-  min-height: calc(100vh - 210px);
-}
-
-a.custom-card,
-a.custom-card:hover {
-  color: inherit;
-  text-decoration: inherit;
-}
-
 .checked {
   color: orange;
 }
@@ -207,3 +197,33 @@ a.custom-card:hover {
   font-weight: bold;
   padding: 1%;
 }
+
+.puntuacion {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  }
+
+  .puntuacion input {
+  position: absolute;
+  top: -100px;
+  }
+
+
+  .puntuacion label {
+  float: right;
+  color: #c1b8b8;
+  font-size: 30px; 
+  }
+
+  .puntuacion label:hover,
+  .puntuacion label:hover ~ label,
+  .puntuacion input:checked ~ label {
+  color:red;
+  }
+  span{
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-weight: 400;
+      color: blue;
+      display: none;
+  }
