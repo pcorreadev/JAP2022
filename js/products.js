@@ -49,27 +49,6 @@ document.getElementById("filtrar").addEventListener("click", function(){
     getProducts();
 });
 
-// var products = document.getElementById("product list");
-
-// var theElements = hostDiv.getElementsByClassName("theClassDivName");
-
-// theElements[0].style.display = "none";
-
-
-
-// document.getElementsByClassName("list-group-item").getElementById("product list")addEventListener("click", function(){
-//     const setProdId = () => {
-//         localStorage.setItem("prodId", id);
-//         window.location = "products.html"
-//     }
-//     setProdId();
-// })
-
-// function setProdID(id) {
-//     localStorage.setItem("prodID", id);
-//     window.location = "product-info.html"
-// }
-
 document.getElementById("reset").addEventListener("click", function(){
     minCount = undefined
     maxCount = undefined
@@ -97,46 +76,6 @@ function sortProducts(){
 }
 getProducts()
 }
-
-// const openProduct = () => {
-// let list = document.querySelectorAll("img");
-//     for (let item of list) {
-//     item.addEventListener('click', function() {
-//         const setProdId = () => {
-//             localStorage.setItem("prodId", id);
-//             window.location = "products.html"
-//         }
-//         setProdId(id);
-//     })
-//     }
-// }
-
-// const openProduct = () => {
-// const elements = document.querySelectorAll(".product")
-//     for (let item of elements) {
-//         item.addEventListener('click', function() {
-//         window.location = "products.html"
-//     }
-//     )}
-// }
-
-// const openProduct = () => {
-// let arrayElements = document.querySelectorAll('img');
-// for (let element of arrayElements) {
-//     element.addEventListener("click", function() {
-//         console.log('Whoa! You clicked me')
-//     });
-// }
-// }
-
-
-// }
-
-// const fakeImages = document.querySelectorAll("img")
-// 	for (const fakeImage of fakeImages) {
-// 	    fakeimage.addEventListener('click', function(event) {
-   
-// 	}
 
 document.addEventListener("DOMContentLoaded", function(e){
     let usuario = localStorage.getItem('user');
@@ -173,15 +112,5 @@ document.addEventListener("DOMContentLoaded", function(e){
         criteria =(ORDER_ASC_BY_PRICE);
         sortProducts();
     });
-
-    // const buttons = document.querySelectorAll("div")
-    // for (const button of buttons) {
-    // button.addEventListener('click', function(event) {
-    // console.log('talo')
-    // })
-    // }
-
-    // openProduct();
-
 };
 })

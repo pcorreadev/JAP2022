@@ -29,16 +29,8 @@ const showProduct = () => {
             </li>`
 
         document.getElementById('product').innerHTML= product
-        const productList = document.querySelectorAll("li")
-             for (const product of productList) {
-                product.addEventListener('click', function(e) {
-                let productId = product.id
-                console.log(productId)     
-                localStorage.setItem("prodID", productId);
-                window.location = "product-info.html"
-            })   
+ 
         } 
-    }
 
 const showImages = () => {
     let photos = ""
@@ -86,7 +78,7 @@ document.getElementById('comments').innerHTML += commentsShown
 const showScore = (score) => {
     console.log(score)
     addScore = ''
-    for(var index = 0; index < score; index++)
+    for(let index = 0; index < score; index++)
     addScore += `<label for="radio2"><i class="fa fa-star"></i></i></label>`
     return addScore 
     }
