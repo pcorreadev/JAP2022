@@ -9,7 +9,6 @@ let commentsArray = [];
 let comments = [];
 let addScore = ''
 let userName = localStorage.getItem('user');
-
 let newScore = ''
 
 const showProduct = () => {
@@ -45,6 +44,32 @@ const showImages = () => {
     }
 }
 
+const showRelated = () => {
+    let relatedProd = "";
+    for (let relatedProducts of filteredArray.relatedProducts)
+    relatedProd +=`
+    <li class="related-items" id=${relatedProducts.id}>
+        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+            <div class = "product">
+                <h3 class="mt-0 font-weight-bold mb-2">${relatedProducts.name}</h3>
+                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                    <img src="${relatedProducts.image}" alt="item image" width="200" class media align-items-lg-left>
+                </div>
+            </div>
+        </div>
+    </li>`
+    document.getElementById('related-products').innerHTML= relatedProd
+    const productRelatedlist = document.getElementsByClassName("related-items")
+        for (const product of productRelatedlist) {
+            product.addEventListener('click', function(e) {
+            let productId = product.id
+            console.log(productId)     
+            localStorage.setItem("prodID", productId);
+            window.location = "product-info.html"
+        })   
+    } 
+}
+
 const showComments = () => {
 
     let commentsShown = "";
@@ -60,7 +85,6 @@ const showComments = () => {
             ${showScore(score)}
             </div>
         </div>
-
     </div>
     <div class="row text-left">
         <h4 class="blue-text mt-3">"${comment.description}"</h4>
@@ -75,44 +99,61 @@ const showComments = () => {
 document.getElementById('comments').innerHTML += commentsShown
 }
 
+const cerrarSesion = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('catID');
+    localStorage.removeItem('prodID');
+}
+
+const postComentario = () => {
+    let usuario = {}
+    let today = new Date ();
+    console.log(today)
+    datestring = today.getDate()  + "-" + (today.getMonth()+1) + "-" + today.getFullYear() + " " +
+    today.getHours() + ":" + today.getMinutes();
+    dateTime = datestring.value
+    usuario.dateTime = datestring;
+    usuario.user = userName;
+    usuario.description = document.getElementById('comentario').value;
+    usuario.score = document.getElementById('valor').textContent;
+    commentsArray.push(usuario);
+    showComments(commentsArray)
+    usuario.description = document.getElementById('comentario').value = ''
+    usuario.score = document.getElementById('valor').value = ''
+}
+
 const showScore = (score) => {
-    console.log(score)
     addScore = ''
     for(let index = 0; index < score; index++)
     addScore += `<label for="radio2"><i class="fa fa-star"></i></i></label>`
     return addScore 
-    }
+}
 
-    document.addEventListener("DOMContentLoaded", function(e){
-        let usuario = localStorage.getItem('user');
-        if (usuario === null){
-            window.location = "login.html"
-        } else {
-        document.getElementById('user').innerHTML = usuario ;
-        getJSONData(productID).then(function(resultObj){
-            if (resultObj.status === "ok"){
-                filteredArray = resultObj.data;
-                }
-                document.getElementById('title').innerHTML = filteredArray.name;
-                showProduct();
-                showImages(); 
-                getJSONData(productComments).then(function(comments){
-                    commentsArray = comments.data
-                    console.log(commentsArray)
-                    showComments();
-                    document.getElementById('send').addEventListener("click", function(){
-                        let usuario = {}
-                        let today = new Date ();
-                        console.log(today)
-                        dateTime = today.getDate() + "/" + parseInt(today.getMonth()+ 1) + "/" + today.getFullYear();
-                        usuario.dateTime = today;
-                        usuario.user = userName;
-                        usuario.description = document.getElementById('comentario').value;
-                        usuario.score = document.getElementById('valor').textContent;
-                        commentsArray.push(usuario);
-                        showComments(commentsArray)
-                    })  
-                })   
+document.addEventListener("DOMContentLoaded", function(e){
+    let usuario = localStorage.getItem('user');
+    if (usuario === null){
+        window.location = "login.html"
+    } else {
+    getJSONData(productID).then(function(resultObj){
+        if (resultObj.status === "ok"){
+            filteredArray = resultObj.data;
+            }
+            document.getElementById('logoutBtn').addEventListener("click", function(){
+            cerrarSesion();
+            })
+            document.getElementById('dropdownMenuButton1').innerHTML= 'Bienvenido ' + userName
+            document.getElementById('title').innerHTML = filteredArray.name;
+            showProduct();
+            showImages(); 
+            showRelated();
+            getJSONData(productComments).then(function(comments){
+                commentsArray = comments.data
+                console.log(commentsArray)
+                showComments();
+                document.getElementById('send').addEventListener("click", function(){
+                postComentario()
+                })  
+            })
         }
     )}
 })

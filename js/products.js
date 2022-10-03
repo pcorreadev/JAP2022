@@ -9,39 +9,39 @@ let maxCount = undefined;
 let minCount = undefined;
 
 const getProducts = () => {
-        let product="";
-        initialArray.products.map((item)=>{
-                if (((minCount == undefined) || (minCount != undefined && item.cost >= minCount)) &&
-                ((maxCount == undefined) || (maxCount != undefined && item.cost <= maxCount))) {
-                product +=`
-                <li class="list-group-item" id=${item.id}>
-                <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                    <div class = "product">
-                        <h3 class="mt-0 font-weight-bold mb-2">${item.name}</h3>
-                        <p class="font-italic text-muted mb-0 small">${item.description}</p>
-                        <div class="d-flex align-items-center justify-content-between mt-1">
-                            <h4 class="font-weight-bold my-2"> ${item.currency + " " + item.cost }</h4>
-                            <h4 class="font-weight-bold my-2"> ${item.soldCount + " vendidos"}</h4>
-                        </div>
+    let product="";
+    initialArray.products.map((item)=>{
+            if (((minCount == undefined) || (minCount != undefined && item.cost >= minCount)) &&
+            ((maxCount == undefined) || (maxCount != undefined && item.cost <= maxCount))) {
+            product +=`
+            <li class="list-group-item" id=${item.id}>
+            <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                <div class = "product">
+                    <h3 class="mt-0 font-weight-bold mb-2">${item.name}</h3>
+                    <p class="font-italic text-muted mb-0 small">${item.description}</p>
+                    <div class="d-flex align-items-center justify-content-between mt-1">
+                        <h4 class="font-weight-bold my-2"> ${item.currency + " " + item.cost }</h4>
+                        <h4 class="font-weight-bold my-2"> ${item.soldCount + " vendidos"}</h4>
                     </div>
                 </div>
-                <div>
-                    <img src="${item.image}" alt="item image" width="200" class media align-items-lg-left>
-                </div>
-                </li>`
-               }
-            })
-            document.getElementById('product list').innerHTML= product
-            const productList = document.querySelectorAll("li")
-                 for (const product of productList) {
-                    product.addEventListener('click', function(e) {
-                    let productId = product.id
-                    console.log(productId)     
-                    localStorage.setItem("prodID", productId);
-                    window.location = "product-info.html"
-                })   
-            } 
-        }
+            </div>
+            <div>
+                <img src="${item.image}" alt="item image" width="200" class media align-items-lg-left>
+            </div>
+            </li>`
+            }
+        })
+        document.getElementById('product list').innerHTML= product
+        const productList = document.querySelectorAll("li")
+            for (const product of productList) {
+            product.addEventListener('click', function(e) {
+            let productId = product.id
+            console.log(productId)     
+            localStorage.setItem("prodID", productId);
+            window.location = "product-info.html"
+        })   
+    } 
+}
 
 document.getElementById("filtrar").addEventListener("click", function(){
     minCount = document.getElementById("min").value;
@@ -90,6 +90,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         document.getElementById('categoria').innerHTML += initialArray.catName;  
         getProducts();
         }
+        console.log(usuario)
     })
 
     document.getElementById("sortRelev").addEventListener("click", function(){
