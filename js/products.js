@@ -2,6 +2,7 @@ const ORDER_ASC_BY_PRICE = "--- a +++";
 const ORDER_DESC_BY_PRICE = "+++ a ---";
 const ORDER_BY_PROD_COUNT = "count";
 let productID = PRODUCTS_URL + localStorage.getItem("catID") + EXT_TYPE;
+let cartID = CART_INFO_URL + localStorage.getItem("id") + EXT_TYPE;
 let initialArray = []
 let currentArray = []
 let criteria = undefined;

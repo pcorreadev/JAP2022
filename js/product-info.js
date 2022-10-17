@@ -11,6 +11,23 @@ let addScore = ''
 let userName = localStorage.getItem('user');
 let newScore = ''
 
+
+// const buyProduct = () => {
+// localStorage.getItem("items", userCart);
+// let pushedItem = {
+//     "id": filteredArray.id,
+//     "name": filteredArray.name,
+//     "count": filteredArray.soldCount,
+//     "unitCost": filteredArray.cost,
+//     "currency": filteredArray.currency,
+//     "image": filteredArray.image
+// }
+
+// if (!userCart.includes(pushedItem)) {
+//     userCart.articles[0].push(pushedItem);
+//   }
+
+
 const showProduct = () => {
     let product="";    
             product =`

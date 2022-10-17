@@ -1,5 +1,8 @@
+let user = document.getElementById('username').value;
+let id = '25801'
+
 const userValidation = () => {
-    let user = document.getElementById('username').value;
+    
     if (user===''){
         document.getElementById('username-error').innerText = 'Usuario no puede estar vacío';
         document.getElementById('username-error').style="visibility: visible";
@@ -21,11 +24,12 @@ const passwordValidation= () => {
 }
 
 const login= () => {
-    let user = document.getElementById('username').value;
+    
     passwordValidation();
     userValidation();
     if (passwordValidation() && userValidation()){
         localStorage.setItem('user', user);
+        localStorage.setItem('id', id);
         location.href='index.html';
     }}
 
