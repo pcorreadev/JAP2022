@@ -63,60 +63,131 @@
                     </tbody>
                 </table>
                 <div class="float-right text-right">
-                    <h4>Total:</h4>
-                    <h4 id="total">0</h4>
+                    <h4>Subtotal:</h4>
+                    <h4 id="subtotalGral" type="number">0</h4>
                 </div>
+                <div class="float-right text-right">
+                  <h4>Envío:</h4>
+                  <h4 id="envio" type="number">0</h4>compra
+              </div>
+              <div class="float-right text-right">
+                <h4>Total:</h4>
+                <h4 id="total" type="number">0</h4>
+            </div>
             </div>
         </div>
-          <form>
+          <form method="post" class="form-group row needs-validation" id="formulario" novalidate>
             <h4>Direccion de envío:</h4>
-            <fieldset class="form-group">
-              <div class="row">
-                <div class="col-sm-10">
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                    <label class="form-check-label" for="gridRadios1">
-                      Premium 2 a 5 días (15%)
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                    <label class="form-check-label" for="gridRadios2">
-                      Express  5 a 8 días (7%)
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                    <label class="form-check-label" for="gridRadios2">
-                      Standard  12 a 15 días (5%)
-                    </label>
-                  </div>
+            <div class="row">
+              <div class="col-sm-10">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="enviosRadio" id="checkPremium" value="option1">
+                  <label class="form-check-label" for="gridRadios1">
+                    Premium 2 a 5 días (15%)
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="enviosRadio" id="checkExpress" value="option2">
+                  <label class="form-check-label" for="gridRadios2">
+                    Express  5 a 8 días (7%)
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="enviosRadio" id="checkStandard" value="option2" checked>
+                  <label class="form-check-label" for="gridRadios3">
+                    Standard  12 a 15 días (5%)
+                  </label>
                 </div>
               </div>
-            </fieldset>
+            </div>
             <div class="row ">
               <div class="col">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Calle</label>
-                      <input type="email" class="form-control" id="inputadress">
+                <label for="nombre-calle" class="col-sm-2 col-form-label">Calle</label>
+                <input type="text" class="form-control" id ="nombre-calle" required>
+                <div class="invalid-feedback">
+                  Ingresa un nombre de calle válido
+                </div> 
               </div>
               <div class="col">
-                <label for="inputPassword3" class="col-sm-2 col-form-label">Numero</label>
-                  <input type="number" class="form-control" id="inputnumber">
+                <label for="inputnumero" class="col-sm-2 col-form-label">Numero</label>
+                  <input type="number" class="form-control" id="numero-puerta" required>
+                  <div class="invalid-feedback">
+                    Ingresa un numero
+                  </div> 
               </div>
             </div>
-            <div class="row">
-              <div class="col-lg-6">
-                <label for="inputPassword3" class="col-sm-2 col-form-label">Esquina</label>
-                  <input type="text" class="form-control" id="inputesquina">
-              </div>
+            <div class="row ">
+              <div class="col">
+                <label for="nombre-calle" class="col-sm-2 col-form-label">Esquina</label>
+                <input type="text" class="form-control" id ="nombre-esquina" required>
+                <div class="invalid-feedback">
+                  Ingresa un nombre de esquina válido
+                </div> 
             </div>
+            <div class="col-sm-12">
+              <button id="btn-modal-metodoPago" type="button" class="btn btn-link ps-0" data-bs-toggle="modal"
+                data-bs-target="#modal-formasPago">Seleccionar</button>
+                <span class="invalid-feedback" id="feedback-modal-metodoPago" display = "hidden">
+                  Debe seleccionar un metodo de pago
+                </span>
+              </div>
             <div class="row">
               <div class="col-sm-10 py-4" >
-                <button type="submit" class="btn btn-primary ">Comprar</button>
+                <button type="submit" class="btn btn-primary" id="submitBtn">Comprar</button>
               </div>
             </div>
+            <div class="modal fade" id="modal-formasPago" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5">Forma de pago</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" id="tarjeta">
+                      <label class="form-check-label" for="tarjeta">Tarjeta</label>
+                    </div>
+                    <div class="col sm-6">
+                      <div class ="row">
+                        <label for="inputTarjeta" class="col-sm-2 col-form-label">Numero de Tarjeta</label>
+                        <input type="number" class="form-control" id="inputTarjeta">
+                        <div class="invalid-feedback">
+                          Ingresa un numero correcto
+                        </div> 
+                      </div>
+                    </div>
+                    <div class ="row">
+                      <label for="cvcTarjeta" class="col-sm-2 col-form-label">CVC</label>
+                      <input type="number" class="form-control" id="cvcTarjeta">
+                      <div class="invalid-feedback">
+                        Ingresa un CVC correcto
+                      </div> 
+                    </div>
+                    <div class ="row">
+                      <label for="vencTarjeta" class="col-sm-2 col-form-label">Vencimiento</label>
+                      <input type="date" class="form-control" id="vencTarjeta">
+                      <div class="invalid-feedback">
+                        Ingresa una fecha valida
+                      </div> 
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" id="transferencia">
+                      <label class="form-check-label" for="transferencia">Transferencia Bancaria</label>
+                      <div class ="row">
+                        <label for="nroCuenta" class="col-sm-2 col-form-label">Numero de cuenta</label>
+                        <input type="number" class="form-control" id="nroCuenta">
+                        <div class="invalid-feedback">
+                          Ingresa un numero de cuenta correcto
+                        </div> 
+                      </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+            </div>
         </form>
-      </div>
+      </div>   
   </main>
   <footer class="text-muted">
     <div class="container">
@@ -128,6 +199,7 @@
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
+
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
@@ -136,9 +208,10 @@
       <div></div>
     </div>
   </div>
+
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
-  <script src="js/cart.js"></script>
+  <script type= "module" src="js/cart.js"></script>
 </body>
 
 </html>
