@@ -45,8 +45,7 @@ const showitemCart = () => {
         <td data-th="price" type="number" classname= "price" name ="price">${item.unitCost} </td>
         <td data-th="subtotal" class = "subtotal" name="subtotal"></td>
         <td data-th="Quantity">
-            <input type="number" name="counter" class="form-control form-control-lg text-center" class="counter" value="1">
-
+            <input type="number" name="counter" class="form-control form-control-lg text-center" class="counter" value="1" min="1" oninput="validity.valid||(value=1);" required>
         </td>
         <td class="actions" data-th="">
             <div class="text-right">
