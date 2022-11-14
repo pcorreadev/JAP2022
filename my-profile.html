@@ -44,16 +44,76 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
-          </li>
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              Bienvenido
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" id="user" href="my-profile.html">Perfil</a></li>
+              <li><a class="dropdown-item" id="carrito" href="cart.html">Mi Carrito</a></li>
+              <li><a class="dropdown-item" href="login.html" id=logoutBtn>Cerrar sesion</a></li>
+            </ul>
+          </div>
         </ul>
       </div>
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+  </div>
+  <form method="post" class="form-group row needs-validation" id="formulario" novalidate>
+    <h4>Perfil</h4>
+    <div class="row ">
+      <div class="col">
+        <label for="nombre" class="col-sm-2 col-form-label">Primer nombre</label>
+        <input type="text" class="form-control" id ="primer-nombre">
+        <div class="invalid-feedback">
+          Ingresa un nombre valido
+        </div> 
+      </div>
+      <div class="col">
+        <label for="segundo-nombre" class="col-sm-2 col-form-label">Segundo nombre</label>
+          <input type="text" class="form-control" id="segundo-nombre">
+          <div class="invalid-feedback">
+            Ingresa un nombre valido
+          </div> 
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col">
+        <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
+        <input type="text" class="form-control" id ="apellido">
+        <div class="invalid-feedback">
+          Ingresa un apellido valido
+        </div>
+      </div>
+        <div class="col">
+          <label for="segundo-apellido" class="col-sm-2 col-form-label">Segundo apellido</label>
+          <input type="text" class="form-control" id ="segundo-apellido">
+          <div class="invalid-feedback">
+            Ingresa un apellido valido
+          </div>
+        </div>  
+    </div>
+    <div class="row ">
+      <div class="col">
+        <label for="email" class="col-sm-2 col-form-label">E-mail</label>
+        <input type="text" class="form-control" id ="email">
+        <div class="invalid-feedback">
+          Ingresa un email valido
+        </div>
+      </div>
+        <div class="col">
+          <label for="telefono" class="col-sm-2 col-form-label">Telefono</label>
+          <input type="number" class="form-control" id ="telefono">
+          <div class="invalid-feedback">
+            Ingresa un telefono válido
+          </div>
+        </div>  
+    </div>
+    <div class="row">
+      <div class="col-sm-10 py-4" >
+        <button type="submit" class="btn btn-primary" id="guardarCambios">Guardar Cambios</button>
       </div>
     </div>
   </main>

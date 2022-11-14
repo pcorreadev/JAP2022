@@ -1,6 +1,7 @@
 let id = '25801'
 let user = ''
 let password = ''
+let email = ''
 
 const userValidation = () => {
     user = document.getElementById('username').value;
@@ -24,22 +25,35 @@ const passwordValidation= () => {
     }
 }
 
-const login= () => {
+const emailValidation= () => {
+    email = document.getElementById('email').value;
+    if (email===''){
+        document.getElementById('email-error').innerText = 'Email no puede estar vacío';
+        document.getElementById('email-error').style="visibility: visible";
+    }else {
+        document.getElementById('email-error').style="visibility: hidden";
+        return true
+    }
+}
+
+const register= () => {
     localStorage.setItem('user', user);
+    localStorage.setItem('email', email);
     localStorage.setItem('id', id);
     localStorage.setItem('password', password);
     passwordValidation();
+    emailValidation();
     userValidation();
-    if (passwordValidation() && userValidation()){
-  
+    if (emailValidation() && passwordValidation() && userValidation()){
+
         location.href='index.html';
     }}
-
+document.getElementById('email').addEventListener("blur",emailValidation)
 document.getElementById('username').addEventListener("blur",userValidation)
 document.getElementById('password').addEventListener("blur",passwordValidation)
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('buttonlogin').addEventListener("click", login);
+    document.getElementById('buttonregister').addEventListener("click", register);
     }
 );
  

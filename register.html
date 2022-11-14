@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>eMercado - Todo lo que busques está aquí</title>
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body {
+      background-color: rgb(248, 249, 250);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="text-center border border-light p-5">
+      <div>
+        <img src="img/login.png" alt="ecommerce-logo" width="30%">
+      </div>
+      <h1>Registrarse</h1>
+          <form class="form-group" id="form">
+              <ul class="list">
+                <li class= "validation-form">
+                  <label class="form-label" for="username">Email:</label>
+                  <input class="form-control" type="text" name="email" id="email" placeholder="Escribe tu nombre de usuario">
+                  <p id="email-error">error</p>
+              </li>
+                  <li class= "validation-form">
+                      <label class="form-label" for="username">Usuario:</label>
+                      <input class="form-control" type="text" name="username" id="username" placeholder="Escribe tu nombre de usuario">
+                      <p id="username-error">error</p>
+                  </li>
+                  <div class= "validation-form">
+                      <label class="form-label" for="password">Contraseña:</label>
+                      <input type="password" class="form-control" name="password" id="password" placeholder="Escribe tu contraseña">
+                      <p id="password-error">error</p>
+                  </div>
+                  <li>
+                      <div>
+                              <input type="checkbox" checked>
+                              <label>Recordarme</label>
+                      </div>
+                  </li>
+              </ul>
+          </form>
+      </div>
+      <div>
+          <a><button type="button" id="buttonregister" class="btn btn-primary btn-block confirm-button">Registrarme</button></a>
+      </div>
+    </section>
+</main>
+  <footer class="text-muted">
+    <div class="container">
+      <p class="float-end">
+        <a href="#">Volver arriba</a>
+      </p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a> -
+        2022</p>
+      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+    </div>
+  </footer>
+  <script src="js/register.js"></script>
+</body>
+
+</html>
