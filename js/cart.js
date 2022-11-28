@@ -1,35 +1,14 @@
 
-// let cartID = CART_INFO_URL + localStorage.getItem('id') + EXT_TYPE;
 let userName = localStorage.getItem('user');
 let dolar = 42
 let cartArray = []
-let cartID = [
-  {
-    "user": 25801,
-    "articles": [
-        {
-            "id": 50924,
-            "name": "Peugeot 208",
-            "count": 1,
-            "unitCost": 15200,
-            "currency": "USD",
-            "image": "img/prod50924_1.jpg"
-        },
-        {
-            "id": 50925,
-            "name": "Tulero",
-            "count": 1,
-            "unitCost": 20000,
-            "currency": "USD",
-            "image": "img/prod50743_1.jpg"
-        }
-    ]
-}
-]
+ const productsArray = localStorage.getItem('productsArray')
+ let cartID = JSON.parse(productsArray);
+ let deleteflag = ''
 
 const showitemCart = () => {
     let product = "";
-    for (let item of cartArray[0].articles)
+    for (let item of cartID[0].articles)
     product +=`
     <tr>
         <td data-th="Product" id=${item.id}>
@@ -49,8 +28,8 @@ const showitemCart = () => {
         </td>
         <td class="actions" data-th="">
             <div class="text-right">
-                <button class="btn btn-white border-secondary bg-white btn-md mb-2">
-                    <i class="fas fa-trash"></i>
+                <button class="deleteBtn" name="deleteBtn" id='${cartID[0].articles.indexOf(item)}'>
+                <i class="fas fa-trash"></i>
                 </button>
             </div>
         </td>
@@ -64,13 +43,14 @@ const calculos = () => {
     let unidades = document.getElementsByName('counter')
     let precios = document.getElementsByName('price');
     let subtotales = document.getElementsByName('subtotal');
-
     let subtotal = 0
+    
     for (let i=0; i< precios.length; i++){
         subtotales [i].innerHTML=parseFloat(precios[i].innerHTML) * parseFloat(unidades[i].value);
         subtotal+= parseFloat(precios[i].innerHTML) * parseFloat(unidades[i].value);
     }
     document.getElementById('subtotalGral').innerHTML = subtotal.toFixed(2)
+
     let envio= 0
     let envioPremium = document.getElementById('checkPremium')
     let envioExpress = document.getElementById('checkExpress')
@@ -168,6 +148,11 @@ const validaciones = () => {
     return flag
 }
 
+const deleteProduct = () => {
+    cartArray = cartID[0].articles.splice(deleteflag,1)
+    showitemCart();
+}
+
 document.getElementById('formulario').addEventListener('submit', evento=>{
     if( !validaciones() ){
         evento.preventDefault();
@@ -178,32 +163,34 @@ document.getElementById('formulario').addEventListener('submit', evento=>{
     events.forEach( event => {document.body.addEventListener(event, validaciones)})
 })
 
-
 document.addEventListener("DOMContentLoaded", function(e){
     let usuario = localStorage.getItem('user');
     if (usuario === null){
         window.location = "login.html"
     } else {
-    // getJSONData(cartID).then(function(resultObj){
-    //     if (resultObj.status === "ok"){
-            cartArray = cartID
-            console.log(cartID)
-    //         }
-            document.getElementById('logoutBtn').addEventListener("click", function(){
-            cerrarSesion();
-            })
-            document.getElementById('dropdownMenuButton1').innerHTML= 'Bienvenido ' + userName
-            showitemCart();
-            let envios = document.getElementsByName('enviosRadio')
-            let unidades = document.getElementsByName('counter')
-            unidades.forEach(elem => elem.addEventListener("change", calculos))
-            envios.forEach(elem => elem.addEventListener("change", calculos))
-            document.getElementById('comprar').addEventListener("click", function(){
-                validaciones();
-                if(validaciones()) {
-                    Swal.fire('La compra fue realizada!')
-                   }
-                })
-        // )}
+        cartArray = cartID
+        document.getElementById('logoutBtn').addEventListener("click", function(){
+        cerrarSesion();
+        })
+        document.getElementById('dropdownMenuButton1').innerHTML= 'Bienvenido ' + userName
+        showitemCart();   
+        let envios = document.getElementsByName('enviosRadio')
+        let unidades = document.getElementsByName('counter')
+        unidades.forEach(elem => elem.addEventListener("change", calculos))
+        envios.forEach(elem => elem.addEventListener("change", calculos))
+     
+        const btns = document.querySelectorAll('.deleteBtn');
+        Array.from(btns).forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            deleteflag = this.id
+            deleteProduct(deleteflag);
+        });
+        });
+        document.getElementById('comprar').addEventListener("click", function(){
+            validaciones();
+            if(validaciones()) {
+                Swal.fire('La compra fue realizada!')
+            }
+        })
     }
 })

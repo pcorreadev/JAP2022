@@ -68,7 +68,7 @@
                 </div>
                 <div class="float-right text-right">
                   <h4>Envío:</h4>
-                  <h4 id="envio" type="number">0</h4>compra
+                  <h4 id="envio" type="number">0</h4>
               </div>
               <div class="float-right text-right">
                 <h4>Total:</h4>
@@ -76,24 +76,23 @@
             </div>
             </div>
         </div>
-          <form method="post" class="form-group row needs-validation" id="formulario" novalidate>
-            <h4>Direccion de envío:</h4>
+          <form method="POST" target="/userData" class="form-group row needs-validation" id="formulario" novalidate>
             <div class="row">
               <div class="col-sm-10">
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="enviosRadio" id="checkPremium" value="option1">
+                  <input class="form-check-input" type="radio" name="envios_tipo" id="checkPremium" value="1">
                   <label class="form-check-label" for="gridRadios1">
                     Premium 2 a 5 días (15%)
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="enviosRadio" id="checkExpress" value="option2">
+                  <input class="form-check-input" type="radio" name="envios_tipo" id="checkExpress" value="2">
                   <label class="form-check-label" for="gridRadios2">
                     Express  5 a 8 días (7%)
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="enviosRadio" id="checkStandard" value="option2" checked>
+                  <input class="form-check-input" type="radio" name="envios_tipo" id="checkStandard" value="2" checked>
                   <label class="form-check-label" for="gridRadios3">
                     Standard  12 a 15 días (5%)
                   </label>
@@ -102,15 +101,16 @@
             </div>
             <div class="row ">
               <div class="col">
+                <h4>Direccion de envío:</h4>
                 <label for="nombre-calle" class="col-sm-2 col-form-label">Calle</label>
-                <input type="text" class="form-control" id ="nombre-calle" required>
+                <input type="text" class="form-control" id ="nombre-calle" name = "nombre_calle" required>
                 <div class="invalid-feedback">
                   Ingresa un nombre de calle válido
                 </div> 
               </div>
               <div class="col">
                 <label for="inputnumero" class="col-sm-2 col-form-label">Numero</label>
-                  <input type="number" class="form-control" id="numero-puerta" required>
+                  <input type="number" class="form-control" id="numero-puerta" name="numero_puerta" required>
                   <div class="invalid-feedback">
                     Ingresa un numero
                   </div> 
@@ -119,7 +119,7 @@
             <div class="row ">
               <div class="col">
                 <label for="nombre-calle" class="col-sm-2 col-form-label">Esquina</label>
-                <input type="text" class="form-control" id ="nombre-esquina" required>
+                <input type="text" class="form-control" id ="nombre-esquina" name ="nombre_esquina" required>
                 <div class="invalid-feedback">
                   Ingresa un nombre de esquina válido
                 </div> 
@@ -145,13 +145,13 @@
                   </div>
                   <div class="modal-body">
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" id="tarjeta">
+                      <input class="form-check-input" type="radio" id="tarjeta" name = tarjeta_seleccion value = 1>
                       <label class="form-check-label" for="tarjeta">Tarjeta</label>
                     </div>
                     <div class="col sm-6">
                       <div class ="row">
                         <label for="inputTarjeta" class="col-sm-2 col-form-label">Numero de Tarjeta</label>
-                        <input type="number" class="form-control" id="inputTarjeta">
+                        <input type="number" class="form-control" id="inputTarjeta" name="numero_tarjeta">
                         <div class="invalid-feedback">
                           Ingresa un numero correcto
                         </div> 
@@ -159,24 +159,24 @@
                     </div>
                     <div class ="row">
                       <label for="cvcTarjeta" class="col-sm-2 col-form-label">CVC</label>
-                      <input type="number" class="form-control" id="cvcTarjeta">
+                      <input type="number" class="form-control" id="cvcTarjeta" name="cvc_tarjeta">
                       <div class="invalid-feedback">
                         Ingresa un CVC correcto
                       </div> 
                     </div>
                     <div class ="row">
                       <label for="vencTarjeta" class="col-sm-2 col-form-label">Vencimiento</label>
-                      <input type="date" class="form-control" id="vencTarjeta">
+                      <input type="date" class="form-control" id="vencTarjeta" name = venc_tarjeta>
                       <div class="invalid-feedback">
                         Ingresa una fecha valida
                       </div> 
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" id="transferencia">
+                      <input class="form-check-input" type="radio" id="transferencia" name="transferencia_seleccion">
                       <label class="form-check-label" for="transferencia">Transferencia Bancaria</label>
                       <div class ="row">
                         <label for="nroCuenta" class="col-sm-2 col-form-label">Numero de cuenta</label>
-                        <input type="number" class="form-control" id="nroCuenta">
+                        <input type="number" class="form-control" id="nroCuenta" name = "nro_cuenta">
                         <div class="invalid-feedback">
                           Ingresa un numero de cuenta correcto
                         </div> 

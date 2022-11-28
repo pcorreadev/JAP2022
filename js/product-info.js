@@ -10,24 +10,14 @@ let comments = [];
 let addScore = ''
 let userName = localStorage.getItem('user');
 let newScore = ''
-
-
-// const buyProduct = () => {
-// localStorage.getItem("items", userCart);
-// let pushedItem = {
-//     "id": filteredArray.id,
-//     "name": filteredArray.name,
-//     "count": filteredArray.soldCount,
-//     "unitCost": filteredArray.cost,
-//     "currency": filteredArray.currency,
-//     "image": filteredArray.image
-// }
-
-// if (!userCart.includes(pushedItem)) {
-//     userCart.articles[0].push(pushedItem);
-//   }
-
-
+let productsArray = [
+    {
+      "user": 25801,
+      "articles": [
+      ]
+  }
+  ]
+  
 const showProduct = () => {
     let product="";    
             product =`
@@ -45,19 +35,27 @@ const showProduct = () => {
             </li>`
 
         document.getElementById('product').innerHTML= product
- 
-        } 
+    } 
 
 const showImages = () => {
     let photos = ""
-    for (let images of filteredArray.images){
-        photos+=
+    let galleryArray = JSON.parse(JSON.stringify(filteredArray))
+    console.log(galleryArray)
+    galleryArray.images.shift();
+    photos+=
     `
-    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-        <img src="${images}" alt="item image" width="200" class media align-items-lg-left>
+    <div class="carousel-item active">
+        <img class="testimonial-img" src="${filteredArray.images[0]}" style="width: 100%">
     </div>
     `
-    document.getElementById('gallery').innerHTML= photos
+    for (let images of galleryArray.images){
+        photos+=
+    `
+    <div class="carousel-item">
+        <img class="testimonial-img" src="${images}" style="width: 100%">
+    </div>
+    `
+    document.getElementById('carousel-photos').innerHTML= photos
     }
 }
 
@@ -146,6 +144,27 @@ const showScore = (score) => {
     return addScore 
 }
 
+const comprar = () => {
+    let articulo =
+    {
+        "id": filteredArray.id,
+        "name": filteredArray.name,
+        "count": filteredArray.count,
+        "unitCost": filteredArray.cost,
+        "currency": filteredArray.currency,
+        "image": filteredArray.images[0]
+    }
+    if (localStorage.getItem("productsArray") === null) {
+        productsArray[0].articles.push(articulo);
+        localStorage.setItem("productsArray", JSON.stringify(productsArray));
+    } else {
+        let oldproductsArray = JSON.parse(localStorage.getItem('productsArray'));
+        console.log(oldproductsArray)
+        oldproductsArray[0].articles.push(articulo);
+        localStorage.setItem("productsArray", JSON.stringify(oldproductsArray));
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function(e){
     let usuario = localStorage.getItem('user');
     if (usuario === null){
@@ -163,6 +182,9 @@ document.addEventListener("DOMContentLoaded", function(e){
             showProduct();
             showImages(); 
             showRelated();
+            document.getElementById('botonComprar').addEventListener("click", function(){
+                comprar();
+            })
             getJSONData(productComments).then(function(comments){
                 commentsArray = comments.data
                 console.log(commentsArray)

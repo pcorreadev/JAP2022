@@ -33,7 +33,14 @@ const login= () => {
     if (passwordValidation() && userValidation()){
   
         location.href='index.html';
-    }}
+}}
+   
+function onSignIn(googleUser) {
+    let profile = googleUser.getBasicProfile();
+    localStorage.setItem('id', profile.getId());
+    localStorage.setItem('user', profile.getName());
+    location.href='index.html'
+}
 
 document.getElementById('username').addEventListener("blur",userValidation)
 document.getElementById('password').addEventListener("blur",passwordValidation)

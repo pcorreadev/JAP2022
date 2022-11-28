@@ -61,18 +61,26 @@
   </nav>
   <main>
   </div>
-  <form method="post" class="form-group row needs-validation" id="formulario" novalidate>
-    <h4>Perfil</h4>
-    <div class="row ">
+  <form method="post" class="form-group row needs-validation m-1" id="formulario" novalidate>
+    <h2>Perfil</h2>
+    <div class="row">
+      <div class="container">
+        <div class="row">
+            <div class="col">
+                <img class ="p-1"  id="perfil" 
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"  width= "5%"/>
+            </div>
+        </div>
+    </div>
       <div class="col">
-        <label for="nombre" class="col-sm-2 col-form-label">Primer nombre</label>
+        <label for="nombre" class="form-label">Primer nombre</label>
         <input type="text" class="form-control" id ="primer-nombre">
         <div class="invalid-feedback">
           Ingresa un nombre valido
         </div> 
       </div>
       <div class="col">
-        <label for="segundo-nombre" class="col-sm-2 col-form-label">Segundo nombre</label>
+        <label for="segundo-nombre" class="form-label">Segundo nombre</label>
           <input type="text" class="form-control" id="segundo-nombre">
           <div class="invalid-feedback">
             Ingresa un nombre valido
@@ -81,14 +89,14 @@
     </div>
     <div class="row ">
       <div class="col">
-        <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
+        <label for="apellido" class="form-label">Apellido</label>
         <input type="text" class="form-control" id ="apellido">
         <div class="invalid-feedback">
           Ingresa un apellido valido
         </div>
       </div>
         <div class="col">
-          <label for="segundo-apellido" class="col-sm-2 col-form-label">Segundo apellido</label>
+          <label for="segundo-apellido" class="form-label">Segundo apellido</label>
           <input type="text" class="form-control" id ="segundo-apellido">
           <div class="invalid-feedback">
             Ingresa un apellido valido
@@ -97,23 +105,30 @@
     </div>
     <div class="row ">
       <div class="col">
-        <label for="email" class="col-sm-2 col-form-label">E-mail</label>
+        <label for="email" class="form-label">E-mail</label>
         <input type="text" class="form-control" id ="email">
         <div class="invalid-feedback">
           Ingresa un email valido
         </div>
       </div>
         <div class="col">
-          <label for="telefono" class="col-sm-2 col-form-label">Telefono</label>
+          <label for="telefono" class="form-label">Telefono</label>
           <input type="number" class="form-control" id ="telefono">
           <div class="invalid-feedback">
             Ingresa un telefono válido
           </div>
         </div>  
-    </div>
-    <div class="row">
-      <div class="col-sm-10 py-4" >
-        <button type="submit" class="btn btn-primary" id="guardarCambios">Guardar Cambios</button>
+      </div>
+      <div class="row">
+        <div class="col-sm-10 py-4" >
+          <button type="submit" class="btn btn-primary" id="guardarCambios">Guardar Cambios</button>
+        </div>
+      </div>
+      <div class="m=1">
+        <h4>Seleccionar Archivo</h4>
+      </div>
+      <div>
+          <input class="form-control form-control-lg" id="selecPerfil" type="file" placeholder="Ningun archivo seleccionado"/>
       </div>
     </div>
   </main>

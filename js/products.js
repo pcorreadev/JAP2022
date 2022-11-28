@@ -9,9 +9,18 @@ let criteria = undefined;
 let maxCount = undefined;
 let minCount = undefined;
 
+let flag = true
+
 const getProducts = () => {
     let product="";
-    initialArray.products.map((item)=>{
+    let array = "";
+    if (flag === true) {
+    array = initialArray.products
+    }
+    else {
+    array = currentArray
+    }
+    array.map((item)=>{
             if (((minCount == undefined) || (minCount != undefined && item.cost >= minCount)) &&
             ((maxCount == undefined) || (maxCount != undefined && item.cost <= maxCount))) {
             product +=`
@@ -37,11 +46,29 @@ const getProducts = () => {
             for (const product of productList) {
             product.addEventListener('click', function(e) {
             let productId = product.id
-            console.log(productId)     
+            console.log(productId)
             localStorage.setItem("prodID", productId);
             window.location = "product-info.html"
-        })   
-    } 
+        })
+    }
+}
+
+
+const buscar = () => {
+let inputBuscar = document.getElementById("buscador").value;
+
+let searchResult = initialArray.products.filter(initialArray => {
+     return (initialArray.name.toLowerCase().indexOf(inputBuscar.toLowerCase()) > -1 && initialArray.description.toLowerCase().indexOf(inputBuscar.toLowerCase()) > -1);
+    })
+
+    if (inputBuscar != '') {
+    currentArray = searchResult;
+    flag = false
+    }
+    else {
+    currentArray = initialArray;
+    flag = true
+    }
 }
 
 document.getElementById("filtrar").addEventListener("click", function(){
@@ -63,7 +90,7 @@ document.getElementById("reset").addEventListener("click", function(){
 function sortProducts(){
     if (criteria === ORDER_BY_PROD_COUNT){
     initialArray.products.sort(function (a, b) {
-        return b.soldCount - a.soldCount   
+        return b.soldCount - a.soldCount
     });
     }else if (criteria === ORDER_DESC_BY_PRICE){
     initialArray.products.sort(function (a, b) {
@@ -72,8 +99,8 @@ function sortProducts(){
 
     }else if (criteria === ORDER_ASC_BY_PRICE){
     initialArray.products.sort(function (a, b) {
-    return a.cost - b.cost 
-    })  
+    return a.cost - b.cost
+    })
 }
 getProducts()
 }
@@ -88,14 +115,22 @@ document.addEventListener("DOMContentLoaded", function(e){
     if (resultObj.status === "ok"){
         initialArray = resultObj.data
         currentArray = JSON.parse(JSON.stringify(initialArray));
-        document.getElementById('categoria').innerHTML += initialArray.catName;  
+        document.getElementById('categoria').innerHTML += initialArray.catName;
         getProducts();
+        console.log(productID)
+        document.getElementById("buscar").addEventListener("click", function(){
+            buscar();
+            console.log(initialArray);
+            getProducts(initialArray);
+
+        });
         }
-        console.log(usuario)
+        console.log(usuario);
+        console.log(currentArray);
     })
 
     document.getElementById("sortRelev").addEventListener("click", function(){
-        criteria = ORDER_BY_PROD_COUNT; 
+        criteria = ORDER_BY_PROD_COUNT;
         sortProducts();
     });
 
@@ -109,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         sortProducts();
     });
 
-    
+
     document.getElementById("sortAsc").addEventListener("click", function(){
         criteria =(ORDER_ASC_BY_PRICE);
         sortProducts();

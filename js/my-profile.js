@@ -9,6 +9,9 @@ let segundoApellido = document.getElementById('segundo-apellido')
 let telefono = document.getElementById('telefono')
 let email = document.getElementById('email')
 
+let input = document.getElementById("selecPerfil");
+let imagen= document.getElementById("perfil");
+
 const validaciones = () => {
     let regexEmail =/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
     let regexText =/^[A-Za-z]+$/
@@ -64,6 +67,30 @@ document.getElementById('formulario').addEventListener('submit', evento=>{
     events.forEach( event => {document.body.addEventListener(event, validaciones)})
     localStorage.setItem("userData", JSON.stringify(userData));
 })
+
+
+const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);    
+        fileReader.addEventListener('error', () => {
+            reject(error);
+        }); 
+        fileReader.addEventListener('load', () => {
+            resolve(fileReader.result);
+        });
+    });
+}
+
+const uploadImage = async (event) => {
+    const file = event.target.files[0];
+    const base64 = await convertBase64(file);
+    imagen.src = base64;
+};
+
+input.addEventListener("change", (file) => {
+    uploadImage(file);
+});
 
 document.addEventListener("DOMContentLoaded", function(e){
     if (usuario === null){
